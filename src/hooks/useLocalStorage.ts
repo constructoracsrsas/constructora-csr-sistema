@@ -2,6 +2,16 @@ typescript
 import { useState, useEffect } from 'react';
 
 // Interfaces para los tipos de datos
+export interface DocumentoEmpleado {
+  id: string;
+  tipo: 'arl' | 'eps' | 'caja_compensacion' | 'pensiones' | 'cuenta_bancaria' | 'contrato' | 'cedula' | 'anexos';
+  nombre: string;
+  archivo: string; // Base64 encoded file
+  fechaSubida: string;
+  tamaño: number; // en bytes
+  tipoArchivo: string; // MIME type
+}
+
 export interface Empleado {
   id: string;
   nombre: string;
@@ -14,6 +24,7 @@ export interface Empleado {
   salario: number;
   fechaIngreso: string;
   activo: boolean;
+  documentos: DocumentoEmpleado[];
 }
 
 export interface Proyecto {
@@ -135,10 +146,11 @@ function useLocalStorage<T>(key: string, initialValue: T) {
 export function useEmpleados() {
   const [empleados, setEmpleados] = useLocalStorage<Empleado[]>('empleados', []);
 
-  const agregarEmpleado = (empleado: Omit<Empleado, 'id'>) => {
+  const agregarEmpleado = (empleado: Omit<Empleado, 'id' | 'documentos'>) => {
     const nuevoEmpleado: Empleado = {
       ...empleado,
       id: Date.now().toString(),
+      documentos: [],
     };
     setEmpleados(prev => [...prev, nuevoEmpleado]);
     return nuevoEmpleado;
@@ -156,11 +168,39 @@ export function useEmpleados() {
     );
   };
 
+  const agregarDocumento = (empleadoId: string, documento: Omit<DocumentoEmpleado, 'id'>) => {
+    const nuevoDocumento: DocumentoEmpleado = {
+      ...documento,
+      id: Date.now().toString(),
+    };
+    
+    setEmpleados(prev => 
+      prev.map(emp => 
+        emp.id === empleadoId 
+          ? { ...emp, documentos: [...(emp.documentos || []), nuevoDocumento] }
+          : emp
+      )
+    );
+    return nuevoDocumento;
+  };
+
+  const eliminarDocumento = (empleadoId: string, documentoId: string) => {
+    setEmpleados(prev => 
+      prev.map(emp => 
+        emp.id === empleadoId 
+          ? { ...emp, documentos: (emp.documentos || []).filter(doc => doc.id !== documentoId) }
+          : emp
+      )
+    );
+  };
+
   return {
     empleados,
     agregarEmpleado,
     actualizarEmpleado,
     eliminarEmpleado,
+    agregarDocumento,
+    eliminarDocumento,
   };
 }
 
