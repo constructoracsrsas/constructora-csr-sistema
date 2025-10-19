@@ -1,4 +1,3 @@
-typescript 
 import { Empleado } from '@/hooks/useLocalStorage';
 
 const empleadosIniciales: Empleado[] = [
