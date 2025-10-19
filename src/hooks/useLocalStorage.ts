@@ -1,4 +1,3 @@
-typescript 
 import { useState, useEffect } from 'react';
 
 // Interfaces para los tipos de datos
