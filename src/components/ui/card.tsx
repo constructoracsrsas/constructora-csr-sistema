@@ -1,78 +1,44 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
-
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
-Card.displayName = "Card"
-
-const CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
-    {...props}
-  />
-))
-CardHeader.displayName = "CardHeader"
-
-const CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn(
-      "text-2xl font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-))
-CardTitle.displayName = "CardTitle"
-
-const CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-))
-CardDescription.displayName = "CardDescription"
-
-const CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
-
-const CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex items-center p-6 pt-0", className)}
-    {...props}
-  />
-))
-CardFooter.displayName = "CardFooter"
-
-export { Card, CardHeader, CardFooter, CardTitle, Card
+20:43:26.439 
+x Build failed in 435ms
+20:43:26.439 
+error during build:
+20:43:26.439 
+[vite:esbuild] Transform failed with 1 error:
+20:43:26.440 
+/vercel/path0/src/components/ui/card.tsx:79:0: ERROR: Expected "}" but found end of file
+20:43:26.440 
+file: /vercel/path0/src/components/ui/card.tsx:79:0
+20:43:26.440 
+20:43:26.440 
+Expected "}" but found end of file
+20:43:26.440 
+77 |  
+20:43:26.440 
+78 |  export { Card, CardHeader, CardFooter, CardTitle, Card
+20:43:26.440 
+79 |  
+20:43:26.440 
+   |  ^
+20:43:26.440 
+20:43:26.440 
+    at failureErrorWithLog (/vercel/path0/node_modules/esbuild/lib/main.js:1472:15)
+20:43:26.440 
+    at /vercel/path0/node_modules/esbuild/lib/main.js:755:50
+20:43:26.440 
+    at responseCallbacks.<computed> (/vercel/path0/node_modules/esbuild/lib/main.js:622:9)
+20:43:26.440 
+    at handleIncomingPacket (/vercel/path0/node_modules/esbuild/lib/main.js:677:12)
+20:43:26.440 
+    at Socket.readFromStdout (/vercel/path0/node_modules/esbuild/lib/main.js:600:7)
+20:43:26.440 
+    at Socket.emit (node:events:519:28)
+20:43:26.440 
+    at addChunk (node:internal/streams/readable:561:12)
+20:43:26.441 
+    at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+20:43:26.441 
+    at Readable.push (node:internal/streams/readable:392:5)
+20:43:26.441 
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+20:43:26.458 
+Error: Command "npm run build" exited with 1
